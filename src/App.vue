@@ -1,28 +1,40 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id='app'>
+    <Header></Header>
+    <Search v-bind:searchQueryHistory="searchQueryHistory" 
+    v-on:addSearchQueryHistory="addSearchQueryHistory"></Search>
+    <Category></Category>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/common/Header.vue'
+import Search from './components/search/Search.vue'
+import Category from './components/category/Category.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
-</script>
+    'Header': Header,
+    'Search': Search,
+    'Category': Category
+  },
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    searchQueryHistory: [],
+  }),
+  created() {
+    if(localStorage.length > 0 ){
+                for(var i = 0; i < localStorage.length; i++){
+                    this.searchQueryHistory.push(localStorage.key(i));
+                }
+            }
+  },
+  methods: {
+    addSearchQueryHistory(newQuery){
+      localStorage.setItem(localStorage.length+1, newQuery);
+      this.searchQueryHistory.push(newQuery);
+    }
+  },
+};
+</script>
