@@ -3,25 +3,30 @@
     <Header></Header>
     <Search v-bind:searchQueryHistory="searchQueryHistory" 
     v-on:addSearchQueryHistory="addSearchQueryHistory"></Search>
-    <Category></Category>
+    <Menu></Menu>
+    <MainBody></MainBody>
+    
   </div>
 </template>
 
 <script>
 import Header from './components/common/Header.vue'
 import Search from './components/search/Search.vue'
-import Category from './components/category/Category.vue'
+import Menu from './components/common/Menu.vue'
+import MainBody from './components/mainbody/MainBody.vue'
 
 export default {
   name: 'App',
   components: {
     'Header': Header,
     'Search': Search,
-    'Category': Category
+    'Menu': Menu,
+    'MainBody': MainBody,
   },
 
   data: () => ({
     searchQueryHistory: [],
+    
   }),
   created() {
     if(localStorage.length > 0 ){
@@ -38,3 +43,7 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+    
+</style>
